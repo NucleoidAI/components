@@ -1,0 +1,11 @@
+import { Canvas, Meta } from "@storybook/blocks";
+
+import * as TabPanel from "./TabPanel.stories";
+
+<Meta of={TabPanel} />
+
+# TabPanel
+
+`TabPanel` component is a utility component which aids in the management of content in tabs. It conditionally renders its children based on the `value` and `index` props passed to it.
+
+<Canvas of={TabPanel.Default} />

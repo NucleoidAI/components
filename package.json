@@ -42,6 +42,7 @@
     "@mui/x-data-grid": "^6.5.0",
     "react-canvas-confetti": "^1.4.0",
     "react-helmet": "^6.1.0",
+    "react-rnd": "^10.4.1",
     "styled-components": "^5.3.11"
   }
 }
