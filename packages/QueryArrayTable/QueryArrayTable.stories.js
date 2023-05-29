@@ -2,7 +2,7 @@ import React from "react";
 import QueryArrayTable from "./QueryArrayTable";
 
 export default {
-  title: "Components/QueryArrayTable",
+  title: "Nucleoid/QueryArrayTable",
   component: QueryArrayTable,
   argTypes: {},
 };

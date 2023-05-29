@@ -1,0 +1,15 @@
+import { Canvas, Meta } from "@storybook/blocks";
+
+import * as SummaryForm from "./SummaryForm.stories";
+
+<Meta of={SummaryForm} />
+
+# SummaryForm
+
+The `SummaryForm` component provides a way to capture both a summary and a description. This component will trigger handlers when either text field is updated.
+
+## Usage
+
+The `SummaryForm` requires a `summaryTextChangeHandler` and `descriptionTextChangeHandler` functions for handling the text change events. Initial values for the Summary and Description fields can be passed via the `summaryText` and `descriptionText` props.
+
+<Canvas of={SummaryForm.Default} />

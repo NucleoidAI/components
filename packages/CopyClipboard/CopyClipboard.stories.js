@@ -1,4 +1,3 @@
-// CopyClipboard.stories.js
 import React from "react";
 import CopyClipboard from "./CopyClipboard";
 

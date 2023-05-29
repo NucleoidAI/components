@@ -1,0 +1,27 @@
+import { Canvas, Meta } from "@storybook/blocks";
+
+import * as StyledTreeItem from "./StyledTreeItem.stories";
+
+<Meta of={StyledTreeItem} />
+
+# StyledTreeItem
+
+The `StyledTreeItem` is a customizable tree item component from Material-UI Lab. It enables displaying hierarchical data with custom styling.
+
+## Usage
+
+Provide the necessary props to the `StyledTreeItem` component for customization. It requires a `labelIcon`, `labelInfo`, and `labelText` to display information.
+
+<Canvas of={StyledTreeItem.Default} />
+
+## Props
+
+The following props can be passed to the `StyledTreeItem` component:
+
+- `labelText`: The text to be displayed as the item's label.
+- `labelIcon`: An icon to be displayed before the label.
+- `labelInfo`: Additional information to be displayed in a smaller, less emphasized typography next to the label.
+- `bgColor`: Background color for the tree item.
+- `color`: Color for the label and icon of the tree item.
+- `hoverColor`: Background color when the tree item is hovered.
+- `selectedColor`: Background color when the tree item is selected or focused.

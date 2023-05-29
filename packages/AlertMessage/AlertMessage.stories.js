@@ -1,4 +1,3 @@
-// AlertMessage.stories.js
 import React from "react";
 import AlertMessage from "./AlertMessage";
 
