@@ -1,9 +1,8 @@
-// DeleteResourceDialog.stories.js
 import React, { useState, useRef } from "react";
 import DeleteResourceDialog from "./DeleteResourceDialog";
 
 export default {
-  title: "Components/DeleteResourceDialog",
+  title: "Nucleoid/DeleteResourceDialog",
   component: DeleteResourceDialog,
   argTypes: {
     setOpen: {

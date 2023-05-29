@@ -1,0 +1,13 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+
+import * as EditButton from "./EditButton.stories";
+
+<Meta of={EditButton} />
+
+# EditButton
+
+This component shows an edit button with a pencil icon. The `openEditDialog` prop is a function which gets triggered when the button is clicked.
+
+## Story
+
+<Canvas of={EditButton.Default} />

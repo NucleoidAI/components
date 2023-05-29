@@ -1,4 +1,3 @@
-// DeleteMethodDialog.stories.js
 import React from "react";
 import { action } from "@storybook/addon-actions";
 import DeleteMethodDialog from "./DeleteMethodDialog";
