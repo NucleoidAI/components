@@ -7,5 +7,7 @@ export default {
 };
 
 export const Default = {
-  args: {},
+  args: {
+    clipboardText: "This text will get copied to your clipboard.",
+  },
 };

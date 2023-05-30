@@ -3,7 +3,7 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { useState } from "react";
 import { Box, Fab, Tooltip, Typography } from "@mui/material";
 
-const CopyClipboard = () => {
+const CopyClipboard = (props) => {
   const [copied, setCopied] = useState(false);
 
   return (
@@ -16,7 +16,7 @@ const CopyClipboard = () => {
     >
       <ArrowForwardIosIcon />
       <Typography fontFamily={"Trebuchet MS"} variant={"h6"}>
-        npx nucleoidjs start
+        {props.clipboardText}
       </Typography>
       <Tooltip
         title={copied ? "Copied" : ""}
@@ -25,7 +25,7 @@ const CopyClipboard = () => {
       >
         <Fab
           onClick={() => {
-            navigator.clipboard.writeText("npx nucleoidjs start");
+            navigator.clipboard.writeText(props.clipboardText);
             setCopied(true);
           }}
           size="small"
