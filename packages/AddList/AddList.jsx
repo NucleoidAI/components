@@ -4,6 +4,7 @@ import React from "react";
 import { v4 as uuid } from "uuid";
 import { Divider, Fab, Menu, MenuItem } from "@mui/material";
 
+// TODO: consider renaming
 function AddList(props) {
   const { list, clickEvent } = props;
   const [anchorEl, setAnchorEl] = React.useState(null);
