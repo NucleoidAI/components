@@ -1,0 +1,19 @@
+import { Canvas, Meta, Story } from "@storybook/blocks";
+
+import * as TableView from "./TableView.stories";
+
+<Meta of={TableView} />
+
+# TableView
+
+`TableView` is a dynamic table component that can display varying lengths of columns and rows. It accepts `data`, which is an array of objects with keys being the headers and values being the cell values under that header. Also it takes an optional `size` prop to determine the size of the table.
+
+Each object in the `data` array represents a row in the table, and the keys of the object represent the columns.
+
+## Usage
+
+<Canvas of={TableView.Default} />
+
+## Long Table
+
+<Canvas of={TableView.LongTable} />
