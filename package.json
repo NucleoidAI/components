@@ -1,8 +1,16 @@
 {
-  "name": "components",
+  "name": "@nucleoidjs/components",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "author": "NucTeam",
+  "keywords": [
+    "nucleoidjs components",
+    "nucleoidjs",
+    "nucleoid"
+  ],
+  "homepage": "https://nucleoid.com",
+  "license": "Apache-2.0",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
@@ -12,12 +20,9 @@
     "type": "git",
     "url": "git+https://github.com/NucleoidJS/components.git"
   },
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/NucleoidJS/components/issues"
   },
-  "homepage": "https://github.com/NucleoidJS/components#readme",
   "devDependencies": {
     "@storybook/addon-essentials": "^7.0.17",
     "@storybook/addon-interactions": "^7.0.17",
