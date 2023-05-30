@@ -1,0 +1,20 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+
+import * as DeleteDialog from "./DeleteDialog.stories";
+
+<Meta of={DeleteDialog} />
+
+# DeleteDialog
+
+This component shows a dialog for confirming a delete operation. It can handle two types of deletions: resources and methods.
+
+The type of deletion is determined by the `type` prop, which can either be "resource" or "method".
+
+The component has two main functions:
+
+- `setOpen`: A function for controlling the dialog visibility.
+- `deleteFunction`: A function for executing the delete operati
+
+## Story
+
+<Canvas of={DeleteDialog.Method} />
