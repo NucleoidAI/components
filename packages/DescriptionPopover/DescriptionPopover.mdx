@@ -1,0 +1,17 @@
+import { Canvas, Meta } from "@storybook/addon-docs/blocks";
+
+import * as DescriptionPopover from "./DescriptionPopover.stories";
+
+<Meta of={DescriptionPopover} />
+
+# DescriptionPopover
+
+This is the `DescriptionPopover` component. It has several properties:
+
+- `anchorEl`: The HTML element that the popover will attach to.
+- `open`: Controls whether the popover is open or not.
+- `setAnchorEl`: Function to call when the anchor element should be changed.
+- `anchorPos`: Object with `vertical` and `horizontal` properties, defining the position of the popover.
+- `value`: The text content of the popover.
+
+<Canvas of={DescriptionPopover.Default} />

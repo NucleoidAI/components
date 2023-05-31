@@ -1,0 +1,19 @@
+import { Canvas, Meta } from "@storybook/blocks";
+
+import * as Page from "./Page.stories";
+
+<Meta of={Page} />
+
+# Page
+
+The `Page` component displays a page with a title and content. It uses the `Helmet` component to set the page's title.
+
+## Usage
+
+```jsx
+import Page from "./Page";
+
+function MyComponent() {
+  return <Page title="Default Page">This is the default page content.</Page>;
+}
+```

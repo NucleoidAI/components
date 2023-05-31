@@ -1,0 +1,22 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import { action } from "@storybook/addon-actions";
+
+import * as AddList from "./AddList.stories";
+
+<Meta of={AddList} />
+
+# AddList
+
+This component shows a list of items with an `Add` button. When the button is clicked, a menu appears with the items.
+
+### Default
+
+<Canvas of={AddList.Default} />
+
+### Empty list
+
+<Canvas of={AddList.EmptyList} />
+
+### With divider
+
+<Canvas of={AddList.WithDivider} />
