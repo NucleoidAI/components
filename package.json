@@ -1,8 +1,8 @@
 {
   "name": "@nucleoidjs/components",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
-  "main": "index.js",
+  "main": "./index.js",
   "author": "NucTeam",
   "keywords": [
     "nucleoidjs components",
@@ -24,17 +24,17 @@
     "url": "https://github.com/NucleoidJS/components/issues"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^7.0.17",
-    "@storybook/addon-interactions": "^7.0.17",
-    "@storybook/addon-links": "^7.0.17",
-    "@storybook/blocks": "^7.0.17",
-    "@storybook/react": "^7.0.17",
-    "@storybook/react-vite": "^7.0.17",
-    "@storybook/testing-library": "^0.0.14-next.2",
+    "@storybook/addon-essentials": "^7.0.18",
+    "@storybook/addon-interactions": "^7.0.18",
+    "@storybook/addon-links": "^7.0.18",
+    "@storybook/blocks": "^7.0.18",
+    "@storybook/react": "^7.0.18",
+    "@storybook/react-vite": "^7.0.18",
+    "@storybook/testing-library": "^0.1.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "storybook": "^7.0.17"
+    "storybook": "^7.0.18"
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",
