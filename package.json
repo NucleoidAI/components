@@ -1,6 +1,6 @@
 {
-  "name": "gggcomponents",
-  "version": "1.0.6",
+  "name": "@nucleoidjs/components",
+  "version": "1.0.2",
   "description": "",
   "main": "./index.js",
   "author": "NucTeam",
