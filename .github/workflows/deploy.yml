@@ -14,5 +14,5 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
       - run: npm ci
       - run: npm run build:storybook
-      - run: aws s3 rm s3://storybook.graycollar.ai --recursive
-      - run: aws s3 cp storybook-static s3://storybook.graycollar.ai --recursive
+      - run: aws s3 rm s3://storybook.nucleoid.com --recursive
+      - run: aws s3 cp storybook-static s3://storybook.nucleoid.com --recursive
