@@ -1,4 +1,5 @@
 import { TextField } from "@mui/material";
+
 import React, { forwardRef } from "react";
 
 const SummaryForm = forwardRef(
@@ -9,7 +10,7 @@ const SummaryForm = forwardRef(
       summaryText,
       descriptionText,
     },
-    ref
+    ref,
   ) => {
     if (ref) {
       return (
@@ -45,7 +46,7 @@ const SummaryForm = forwardRef(
         </>
       );
     }
-  }
+  },
 );
 
 export default SummaryForm;

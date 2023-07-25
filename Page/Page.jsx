@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
-import React from "react";
 import { Helmet } from "react-helmet"; //eslint-disable-line
+import React from "react";
 
 const Page = ({ title, children }) => {
   return (

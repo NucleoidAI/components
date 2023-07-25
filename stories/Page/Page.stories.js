@@ -1,5 +1,5 @@
-import React from "react";
 import Page from "../../Page/Page";
+import React from "react"; // eslint-disable-line
 
 export default {
   title: "Nucleoid/Page",

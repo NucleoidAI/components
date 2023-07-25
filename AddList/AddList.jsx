@@ -2,6 +2,7 @@ import AddIcon from "@mui/icons-material/Add";
 import Fade from "@mui/material/Fade";
 import React from "react";
 import { v4 as uuid } from "uuid";
+
 import { Divider, Fab, Menu, MenuItem } from "@mui/material";
 
 // TODO: consider renaming
@@ -42,7 +43,7 @@ function AddList(props) {
               >
                 {item}
               </MenuItem>
-            )
+            ),
           )}
       </Menu>
     </>
