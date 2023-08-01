@@ -1,6 +1,6 @@
-import React from "react";
-import { action } from "@storybook/addon-actions";
 import DeleteDialog from "../../DeleteDialog/DeleteDialog";
+import React from "react"; // eslint-disable-line
+import { action } from "@storybook/addon-actions"; // eslint-disable-line
 export default {
   title: "Nucleoid/DeleteDialog",
   component: DeleteDialog,

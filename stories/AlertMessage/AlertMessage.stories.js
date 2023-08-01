@@ -1,5 +1,5 @@
-import React from "react";
 import AlertMessage from "../../AlertMessage/AlertMessage";
+import React from "react"; // eslint-disable-line
 
 export default {
   title: "Nucleoid/AlertMessage",

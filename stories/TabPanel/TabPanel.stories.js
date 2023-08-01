@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"; // eslint-disable-line
 import TabPanel from "../../TabPanel/TabPanel";
 
 export default {

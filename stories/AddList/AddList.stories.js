@@ -1,6 +1,6 @@
-import React from "react";
-import { action } from "@storybook/addon-actions";
 import AddList from "../../AddList/AddList";
+import React from "react"; // eslint-disable-line
+import { action } from "@storybook/addon-actions";
 
 export default {
   title: "Nucleoid/AddList",
