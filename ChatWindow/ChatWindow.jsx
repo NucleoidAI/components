@@ -17,6 +17,7 @@ export const handleAddResponseMessage = (ret) => {
 const ChatWindow = ({
   title,
   open,
+  closeButton,
   handleClose,
   handleNewUserMessage,
   history = [],
@@ -172,7 +173,7 @@ const ChatWindow = ({
           <Box
             sx={{ width: "100%", p: 1, display: "flex", justifyContent: "end" }}
           >
-            <Fab className="handle">
+            <Fab className="handle" onClick={closeButton && handleClose}>
               <ChatIcon />
             </Fab>
           </Box>
