@@ -1,8 +1,10 @@
+import { Box, Fab, IconButton, TextField } from "@mui/material";
+
 import ChatIcon from "@mui/icons-material/Chat";
 import CloseIcon from "@mui/icons-material/Close";
 import React from "react";
 import { Rnd } from "react-rnd";
-import { Box, Fab, IconButton, TextField } from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
 
 const sub = { item: null };
 const response = (res) => {
@@ -13,6 +15,7 @@ export const handleAddResponseMessage = (ret) => {
 };
 
 const ChatWindow = ({
+  title,
   open,
   handleClose,
   handleNewUserMessage,
@@ -100,10 +103,7 @@ const ChatWindow = ({
               cursor: "move",
             }}
           >
-            <Box>
-              NucBot&nbsp;-&nbsp;
-              <small>Powered by OpenAI</small>
-            </Box>
+            <Box>{title}</Box>
             <IconButton onClick={handleClose}>
               <CloseIcon htmlColor="#e0e0e0" />
             </IconButton>
@@ -162,8 +162,11 @@ const ChatWindow = ({
               }}
               placeholder={"Type a message..."}
               size="small"
-              sx={{ width: "100%" }}
+              sx={{ width: "90%", marginRight: "2px" }}
             />
+            <IconButton onClick={newUserMessage}>
+              <SendIcon htmlColor="#323a40" />
+            </IconButton>
           </Box>
           {/*button */}
           <Box
