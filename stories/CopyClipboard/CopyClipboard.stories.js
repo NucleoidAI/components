@@ -1,5 +1,5 @@
-import React from "react";
 import CopyClipboard from "../../CopyClipboard/CopyClipboard";
+import React from "react"; // eslint-disable-line
 
 export default {
   title: "Nucleoid/CopyClipboard",

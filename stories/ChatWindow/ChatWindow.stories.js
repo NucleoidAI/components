@@ -1,5 +1,5 @@
-import React, { useState } from "react";
 import ChatWindow, { handleAddResponseMessage } from "../../ChatWindow";
+import React, { useState } from "react"; // eslint-disable-line
 
 export default {
   title: "Nucleoid/ChatWindow",

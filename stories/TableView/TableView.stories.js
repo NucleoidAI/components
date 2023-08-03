@@ -1,4 +1,3 @@
-import React from "react";
 import TableView from "../../TableView/TableView";
 
 export default {
