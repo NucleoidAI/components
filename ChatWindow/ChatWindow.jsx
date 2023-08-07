@@ -1,8 +1,12 @@
 import ChatIcon from "@mui/icons-material/Chat";
 import CloseIcon from "@mui/icons-material/Close";
+import MessageSfx from "./messageSFX.mp3";
 import React from "react";
 import { Rnd } from "react-rnd";
 import SendIcon from "@mui/icons-material/Send";
+import VolumeOffIcon from "@mui/icons-material/VolumeOff";
+import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+import useSound from "use-sound";
 
 import { Box, Fab, IconButton, TextField } from "@mui/material";
 
@@ -10,6 +14,7 @@ const sub = { item: null };
 const response = (res) => {
   sub.item = res;
 };
+
 export const handleAddResponseMessage = (ret) => {
   sub.item(ret);
 };
@@ -29,6 +34,8 @@ const ChatWindow = ({
     x: 0,
     y: 0,
   });
+  const [mute, setMute] = React.useState(false);
+  const [play] = useSound(MessageSfx);
 
   const messagesEndRef = React.useRef(null);
 
@@ -40,6 +47,8 @@ const ChatWindow = ({
     response((ret) => {
       setMessages([...messages, { message: ret, user: false }]);
     });
+    !mute && play();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [messages]);
 
   React.useEffect(() => {
@@ -56,6 +65,14 @@ const ChatWindow = ({
     handleNewUserMessage(message);
     setMessages([...messages, { message: message, user: true }]);
     setMessage("");
+  };
+
+  const changeMute = () => {
+    setMute(!mute);
+  };
+
+  const chatButtonClick = () => {
+    return closeButton ? handleClose() : false;
   };
 
   if (open) {
@@ -95,7 +112,7 @@ const ChatWindow = ({
             className="handle"
             sx={{
               display: "flex",
-              justifyContent: "space-between",
+              justifyContent: "flex-end",
               alignItems: "center",
               p: 1,
               width: "100%",
@@ -104,7 +121,14 @@ const ChatWindow = ({
               cursor: "move",
             }}
           >
-            <Box>{title}</Box>
+            <Box sx={{ marginRight: "auto" }}>{title}</Box>
+            <IconButton onClick={changeMute} sx={{}}>
+              {mute ? (
+                <VolumeOffIcon htmlColor="#e0e0e0" />
+              ) : (
+                <VolumeUpIcon htmlColor="#e0e0e0" />
+              )}
+            </IconButton>
             <IconButton onClick={handleClose}>
               <CloseIcon htmlColor="#e0e0e0" />
             </IconButton>
@@ -173,7 +197,7 @@ const ChatWindow = ({
           <Box
             sx={{ width: "100%", p: 1, display: "flex", justifyContent: "end" }}
           >
-            <Fab className="handle" onClick={closeButton && handleClose}>
+            <Fab className="handle" onClick={chatButtonClick}>
               <ChatIcon />
             </Fab>
           </Box>
