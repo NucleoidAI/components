@@ -6,15 +6,32 @@ import * as ChatWindow from "./ChatWindow.stories";
 
 # ChatWindow
 
-The `ChatWindow` component represents a draggable and resizable chat window interface powered by the OpenAI chatbot, NucBot. The component includes a chat header, content area for displaying chat history, a text field for new user messages, and a button for submitting new messages.
+The `ChatWindow` component represents a draggable and resizable chat window interface powered by the OpenAI chatbot, NucBot. The component includes a chat header, content area for displaying chat history, a text field for new user messages a button for submitting new messages and allows the use of dictation.
 
 ## Usage
 
 To make use of the `ChatWindow` component, you will need to pass certain props to it. Here's an explanation of each prop:
 
 - `open`: A boolean value indicating whether the chat window is open or closed.
+
 - `handleClose`: A function to handle the closing of the chat window.
+
 - `handleNewUserMessage`: A function to handle new user messages. This function receives the message as its argument.
+
 - `history`: An optional array of message objects to populate the chat window with existing messages. Each object should have a `message` property for the message text, and a `user` property which is true for user messages and false for bot messages.
+
+- `title`: This prop provides the value of the title present in the Top Bar. It takes a string value.
+
+- `color`: It takes two string values, "default" and "appTheme".
+
+   *default*: Represents the original colored state of the Chat Window.
+
+   *appTheme*: Updates the Chat Window according to your application's theme.
+
+- `closeButton`: This prop determines whether the chat button, located below after opening the Chat Window, is used for moving or closing.
+
+   *true*: The closeButton prevents moving the Chat Window button; pressing on it will close the Chat Window.
+
+   *false*: The closeButton becomes ready to be moved; pressing on it will not close the Chat Window.
 
   <Canvas of={ChatWindow.Default} />
