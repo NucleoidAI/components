@@ -1,6 +1,10 @@
+import "regenerator-runtime";
+
 import ChatIcon from "@mui/icons-material/Chat";
 import CloseIcon from "@mui/icons-material/Close";
 import MessageSfx from "./messageSFX.mp3";
+import MicIcon from "@mui/icons-material/Mic";
+import MicNoneIcon from "@mui/icons-material/MicNone";
 import React from "react";
 import { Rnd } from "react-rnd";
 import SendIcon from "@mui/icons-material/Send";
@@ -9,6 +13,9 @@ import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import useSound from "use-sound";
 
 import { Box, Fab, IconButton, TextField } from "@mui/material";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
 
 const sub = { item: null };
 const response = (res) => {
@@ -36,9 +43,10 @@ const ChatWindow = ({
   });
   const [mute, setMute] = React.useState(false);
   const [play] = useSound(MessageSfx);
-
+  const { transcript, browserSupportsSpeechRecognition, resetTranscript } =
+    useSpeechRecognition();
   const messagesEndRef = React.useRef(null);
-
+  const [listen, setListen] = React.useState(false);
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -61,10 +69,20 @@ const ChatWindow = ({
     setDefaultPosition({ x: posX, y: posY });
   }, [open]);
 
+  React.useEffect(() => {
+    listen
+      ? SpeechRecognition.startListening({
+          continuous: true,
+          language: "en-US",
+        })
+      : SpeechRecognition.stopListening();
+  }, [listen]);
+
   const newUserMessage = () => {
-    handleNewUserMessage(message);
-    setMessages([...messages, { message: message, user: true }]);
+    handleNewUserMessage(message, transcript);
+    setMessages([...messages, { message: message || transcript, user: true }]);
     setMessage("");
+    resetTranscript();
   };
 
   const changeMute = () => {
@@ -73,6 +91,10 @@ const ChatWindow = ({
 
   const chatButtonClick = () => {
     return closeButton ? handleClose() : false;
+  };
+
+  const listenUser = () => {
+    setListen(!listen);
   };
 
   if (open) {
@@ -116,21 +138,17 @@ const ChatWindow = ({
               alignItems: "center",
               p: 1,
               width: "100%",
-              color: "#e0e0e0",
-              bgcolor: "#323a40",
               cursor: "move",
             }}
           >
-            <Box sx={{ marginRight: "auto" }}>{title}</Box>
+              {title}
+            </Box>
             <IconButton onClick={changeMute} sx={{}}>
               {mute ? (
-                <VolumeOffIcon htmlColor="#e0e0e0" />
               ) : (
-                <VolumeUpIcon htmlColor="#e0e0e0" />
               )}
             </IconButton>
             <IconButton onClick={handleClose}>
-              <CloseIcon htmlColor="#e0e0e0" />
             </IconButton>
           </Box>
           {/* content */}
@@ -144,8 +162,7 @@ const ChatWindow = ({
               clear: "both",
               display: "flex",
               flexDirection: "column",
-              backgroundColor: "white",
-              border: "solid 0.5px #ddd",
+              backgroundColor: "#FFFFFF",
               userSelect: "text",
             }}
           >
@@ -154,7 +171,6 @@ const ChatWindow = ({
                 key={index}
                 ref={messagesEndRef}
                 style={{
-                  backgroundColor: item.user ? "#e6eff6" : "#f4f7f9",
                   margin: 5,
                   borderRadius: 5,
                   width: "fit-content",
@@ -170,16 +186,20 @@ const ChatWindow = ({
             sx={{
               width: "100%",
               p: 1,
-              bgcolor: "white",
-              border: "solid 0.5px #ddd",
             }}
           >
+            {browserSupportsSpeechRecognition && (
+              <IconButton onClick={listenUser}>
+                {listen ? (
+                  <MicIcon sx={{ color: colorPalette.buttonColor }} />
+                ) : (
+                  <MicNoneIcon sx={{ color: colorPalette.buttonColor }} />
+                )}
+              </IconButton>
+            )}
             <TextField
               autoComplete="off"
               autoFocus
-              variant="outlined"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   newUserMessage();
@@ -187,17 +207,23 @@ const ChatWindow = ({
               }}
               placeholder={"Type a message..."}
               size="small"
-              sx={{ width: "90%", marginRight: "2px" }}
             />
             <IconButton onClick={newUserMessage}>
-              <SendIcon htmlColor="#323a40" />
             </IconButton>
           </Box>
           {/*button */}
           <Box
             sx={{ width: "100%", p: 1, display: "flex", justifyContent: "end" }}
           >
-            <Fab className="handle" onClick={chatButtonClick}>
+            <Fab
+              className="handle"
+              onClick={chatButtonClick}
+              sx={{
+                backgroundColor: colorPalette.title,
+                ":hover": {
+                  color: colorPalette.bar,
+              }}
+            >
               <ChatIcon />
             </Fab>
           </Box>
