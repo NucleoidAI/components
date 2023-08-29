@@ -10,6 +10,7 @@ import { Rnd } from "react-rnd";
 import SendIcon from "@mui/icons-material/Send";
 import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+import styles from "./styles";
 import useSound from "use-sound";
 import { useTheme } from "@mui/material/styles";
 
@@ -155,32 +156,17 @@ const ChatWindow = ({
           bottom: { bottom: 65 },
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            height: "100%",
-            width: "100%",
-          }}
-        >
+        <Box sx={styles.boxHeader}>
           {/* header */}
           <Box
             className="handle"
-            sx={{
-              display: "flex",
-              justifyContent: "flex-end",
-              alignItems: "center",
-              p: 1,
-              width: "100%",
-              bgcolor: colorPalette.bar,
-              cursor: "move",
-            }}
+            sx={styles.header}
+            style={{ backgroundColor: colorPalette.bar }}
           >
             <Box sx={{ marginRight: "auto", color: colorPalette.title }}>
               {title}
             </Box>
-            <IconButton onClick={changeMute} sx={{}}>
+            <IconButton onClick={changeMute}>
               {mute ? (
                 <VolumeOffIcon sx={{ color: colorPalette.buttonColor }} />
               ) : (
@@ -193,19 +179,8 @@ const ChatWindow = ({
           </Box>
           {/* content */}
           <Box
-            sx={{
-              height: "100%",
-              width: "100%",
-              p: 1,
-              overflowY: "auto",
-              float: "left",
-              clear: "both",
-              display: "flex",
-              flexDirection: "column",
-              backgroundColor: "#FFFFFF",
-              border: `solid 0.5px ${colorPalette.bar}`,
-              userSelect: "text",
-            }}
+            sx={styles.content}
+            style={{ border: `solid 0.5px ${colorPalette.bar}` }}
           >
             {messages.map((item, index) => (
               <div
