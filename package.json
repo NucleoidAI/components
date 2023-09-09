@@ -52,8 +52,8 @@
     "@mui/styled-engine-sc": "^5.12.0",
     "@mui/x-data-grid": "^6.5.0",
     "react-canvas-confetti": "^1.4.0",
+    "react-draggable": "^4.4.5",
     "react-helmet": "^6.1.0",
-    "react-rnd": "^10.4.1",
     "react-speech-recognition": "^3.10.0",
     "styled-components": "^5.3.11",
     "use-sound": "^4.0.1"

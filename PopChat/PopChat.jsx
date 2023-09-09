@@ -1,20 +1,22 @@
 import "regenerator-runtime";
+import "./chat.css";
 
 import ChatIcon from "@mui/icons-material/Chat";
 import CloseIcon from "@mui/icons-material/Close";
+import Draggable from "react-draggable";
 import MessageSfx from "./messageSFX.mp3";
 import MicIcon from "@mui/icons-material/Mic";
 import MicNoneIcon from "@mui/icons-material/MicNone";
 import React from "react";
-import { Rnd } from "react-rnd";
 import SendIcon from "@mui/icons-material/Send";
 import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import styles from "./styles";
+import { useEvent } from "@nucleoidjs/synapses";
 import useSound from "use-sound";
 import { useTheme } from "@mui/material/styles";
 
-import { Box, Fab, IconButton, TextField } from "@mui/material";
+import { Box, Container, Fab, IconButton, TextField } from "@mui/material";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
@@ -28,7 +30,7 @@ export const handleAddResponseMessage = (ret) => {
   sub.item(ret);
 };
 
-const ChatWindow = ({
+const PopChat = ({
   title,
   open,
   closeButton,
@@ -37,39 +39,45 @@ const ChatWindow = ({
   history = [],
   color,
 }) => {
+  const [typing] = useEvent("TYPED", { loading: false });
   const [message, setMessage] = React.useState("");
   const [messages, setMessages] = React.useState([...history]);
-  const rndRef = React.useRef();
-  const [defaultPosition, setDefaultPosition] = React.useState({
-    x: 0,
-    y: 0,
-  });
   const [mute, setMute] = React.useState(false);
   const [play] = useSound(MessageSfx);
   const { transcript, browserSupportsSpeechRecognition, resetTranscript } =
     useSpeechRecognition();
   const messagesEndRef = React.useRef(null);
   const [listen, setListen] = React.useState(false);
+
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+    });
   };
+
   const theme = useTheme();
   const defaultColors = {
-    bar: "#323a40",
-    title: "#e0e0e0",
-    chatBubble: "#",
-    background: "#e0e0e0",
-    reciverTextColor: "#",
-    sourceColor: "#",
-    buttonColor: "#e0e0e0",
+    topBar: "#323a40",
+    bottomBar: "#323a40",
+    topBarButton: "#e0e0e0",
+    bottomBarButton: "#e0e0e0",
+    userBubble: "#dcdce0",
+    botBubble: "#dcdce0",
+    message: "#060F12",
+    textField: "white",
+    indicator: "#060F12",
   };
   const themeColors = {
-    bar: theme.palette.primary.main,
-    title: theme.palette.background.default,
-    background: theme.palette.background.paper,
-    reciverColor: theme.palette.text.secondary,
-    sourceColor: theme.palette.secondary.main,
-    buttonColor: theme.palette.secondary.main,
+    topBar: theme.palette.chat.topBar,
+    bottomBar: theme.palette.chat.bottomBar,
+    topBarButton: theme.palette.chat.topBarButton,
+    bottomBarButton: theme.palette.chat.bottomBarButton,
+    userBubble: theme.palette.chat.userBubble,
+    botBubble: theme.palette.chat.botBubble,
+    textField: theme.palette.chat.textField,
+    message: theme.palette.chat.message,
+    indicator: theme.palette.chat.indicator,
   };
   const [colorPalette, setColorPalette] = React.useState();
 
@@ -97,13 +105,7 @@ const ChatWindow = ({
 
   React.useEffect(() => {
     scrollToBottom();
-  }, [messages, open]);
-
-  React.useEffect(() => {
-    const posX = window.innerWidth - 530;
-    const posY = window.innerHeight - 660;
-    setDefaultPosition({ x: posX, y: posY });
-  }, [open]);
+  }, [messages, open, typing]);
 
   React.useEffect(() => {
     listen
@@ -135,87 +137,132 @@ const ChatWindow = ({
 
   if (open) {
     return (
-      <Rnd
-        ref={rndRef}
-        position={{ x: defaultPosition.x, y: defaultPosition.y }}
-        onDragStop={(e, d) => setDefaultPosition({ x: d.x, y: d.y })}
-        default={{
-          x: defaultPosition.x,
-          y: defaultPosition.y,
-          height: 650,
-          width: 450,
-        }}
-        minHeight={650}
-        minWidth={450}
-        bounds={"window"}
-        dragHandleClassName={"handle"}
-        style={{
-          zIndex: 999999999,
-        }}
-        resizeHandleStyles={{
-          bottom: { bottom: 65 },
-        }}
-      >
+      <Draggable>
         <Box sx={styles.boxHeader}>
           {/* header */}
           <Box
             className="handle"
-            sx={styles.header}
-            style={{ backgroundColor: colorPalette.bar }}
+            sx={{
+              backgroundColor: colorPalette.topBar,
+              display: "flex",
+              justifyContent: "flex-end",
+              alignItems: "center",
+              p: 1,
+              width: "100%",
+              cursor: "move",
+              boxShadow: 20,
+            }}
+            style={{
+              borderRadius: "7px 7px 0px 0px",
+            }}
           >
-            <Box sx={{ marginRight: "auto", color: colorPalette.title }}>
+            <Box sx={{ marginRight: "auto", color: colorPalette.topBarButton }}>
               {title}
             </Box>
             <IconButton onClick={changeMute}>
               {mute ? (
-                <VolumeOffIcon sx={{ color: colorPalette.buttonColor }} />
+                <VolumeOffIcon sx={{ color: colorPalette.topBarButton }} />
               ) : (
-                <VolumeUpIcon sx={{ color: colorPalette.buttonColor }} />
+                <VolumeUpIcon sx={{ color: colorPalette.topBarButton }} />
               )}
             </IconButton>
             <IconButton onClick={handleClose}>
-              <CloseIcon sx={{ color: colorPalette.buttonColor }} />
+              <CloseIcon sx={{ color: colorPalette.topBarButton }} />
             </IconButton>
           </Box>
           {/* content */}
-          <Box
-            sx={styles.content}
-            style={{ border: `solid 0.5px ${colorPalette.bar}` }}
-          >
+          <Box sx={styles.content} style={{}}>
             {messages.map((item, index) => (
-              <div
+              <Container
                 key={index}
-                ref={messagesEndRef}
-                style={{
-                  backgroundColor: item.user
-                    ? colorPalette.reciverColor
-                    : colorPalette.sourceColor,
-                  margin: 5,
-                  borderRadius: 5,
-                  width: "fit-content",
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
                   alignSelf: item.user ? "end" : "start",
-                  color: "black",
+                  padding: "1px",
+                  marginY: 0.5,
                 }}
               >
-                <div style={{ padding: 12 }}>{item.message}</div>
-              </div>
+                <div
+                  style={{
+                    backgroundColor: item.user
+                      ? colorPalette.userBubble
+                      : colorPalette.botBubble,
+                    alignSelf: item.user ? "end" : "start",
+                    color: colorPalette.message,
+                    borderRadius: item.user
+                      ? "15px 15px 0px 15px"
+                      : "15px 15px 15px 0px",
+                    minWidth: "60px",
+                    minHeight: "50px",
+                    width: "fit-content",
+                    display: "flex",
+                    alignContent: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      padding: 9,
+                      fontSize: "16.5px",
+                      alignSelf: "center",
+                    }}
+                  >
+                    {item.message}
+                  </div>
+                </div>
+              </Container>
             ))}
+            {typing.loading && (
+              <div
+                style={{
+                  backgroundColor: colorPalette.botBubble,
+                  width: "fit-content",
+                  alignSelf: "start",
+                  borderRadius: "15px 15px 15px 0px",
+                  marginLeft: "25px",
+                  minWidth: "20px",
+                }}
+              >
+                <div style={{ padding: 5 }}>
+                  <Container
+                    sx={{
+                      display: "flex",
+                      alignContent: "end",
+                      marginY: "10px",
+                      justifyContent: "start",
+                    }}
+                  >
+                    <div ref={messagesEndRef}>
+                      <div
+                        className="dots"
+                        style={{
+                          "--_g": `no-repeat radial-gradient(circle closest-side,  ${colorPalette.indicator} 90%,#0000)`,
+                        }}
+                      ></div>
+                    </div>
+                  </Container>
+                </div>
+              </div>
+            )}
           </Box>
           {/*footer */}
           <Box
             sx={{
               width: "100%",
               p: 1,
-              border: `solid 0.5px ${colorPalette.bar}`,
-              bgcolor: colorPalette.bar,
+              boxShadow: 20,
+              backgroundColor: colorPalette.bottomBar,
+              borderRadius: "0px 0px 7px 7px",
             }}
           >
             {browserSupportsSpeechRecognition && (
               <IconButton onClick={listenUser}>
                 {listen ? (
-                  <MicIcon sx={{ color: colorPalette.buttonColor }} />
+                  <MicIcon sx={{ color: colorPalette.bottomBarButton }} />
                 ) : (
-                  <MicNoneIcon sx={{ color: colorPalette.buttonColor }} />
+                  <MicNoneIcon sx={{ color: colorPalette.bottomBarButton }} />
                 )}
               </IconButton>
             )}
@@ -241,39 +288,28 @@ const ChatWindow = ({
                 width: "80%",
                 marginX: "3px",
                 input: {
-                  color: colorPalette.title,
+                  color: colorPalette.textField,
                 },
               }}
             />
             <IconButton onClick={newUserMessage}>
-              <SendIcon sx={{ color: colorPalette.buttonColor }} />
+              <SendIcon sx={{ color: colorPalette.bottomBarButton }} />
             </IconButton>
           </Box>
           {/*button */}
           <Box
             sx={{ width: "100%", p: 1, display: "flex", justifyContent: "end" }}
           >
-            <Fab
-              className="handle"
-              onClick={chatButtonClick}
-              sx={{
-                color: colorPalette.bar,
-                backgroundColor: colorPalette.title,
-                ":hover": {
-                  color: colorPalette.bar,
-                  backgroundColor: colorPalette.title,
-                },
-              }}
-            >
+            <Fab className="handle" onClick={chatButtonClick}>
               <ChatIcon />
             </Fab>
           </Box>
         </Box>
-      </Rnd>
+      </Draggable>
     );
   } else {
     return null;
   }
 };
 
-export default ChatWindow;
+export default PopChat;
