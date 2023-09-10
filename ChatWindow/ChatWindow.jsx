@@ -12,7 +12,6 @@ import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import styles from "./styles";
 import useSound from "use-sound";
-import { useTheme } from "@mui/material/styles";
 
 import { Box, Fab, IconButton, TextField } from "@mui/material";
 import SpeechRecognition, {
@@ -36,6 +35,7 @@ const ChatWindow = ({
   handleNewUserMessage,
   history = [],
   color,
+  theme,
 }) => {
   const [message, setMessage] = React.useState("");
   const [messages, setMessages] = React.useState([...history]);
@@ -53,7 +53,9 @@ const ChatWindow = ({
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
-  const theme = useTheme();
+
+  const [colorPalette, setColorPalette] = React.useState();
+
   const defaultColors = {
     bar: "#323a40",
     title: "#e0e0e0",
@@ -71,8 +73,6 @@ const ChatWindow = ({
     sourceColor: theme.palette.secondary.main,
     buttonColor: theme.palette.secondary.main,
   };
-  const [colorPalette, setColorPalette] = React.useState();
-
   React.useEffect(() => {
     switch (color) {
       case "default": {
