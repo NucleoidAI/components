@@ -14,7 +14,6 @@ import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import styles from "./styles";
 import { useEvent } from "@nucleoidjs/synapses";
 import useSound from "use-sound";
-import { useTheme } from "@mui/material/styles";
 
 import { Box, Container, Fab, IconButton, TextField } from "@mui/material";
 import SpeechRecognition, {
@@ -38,6 +37,7 @@ const PopChat = ({
   handleNewUserMessage,
   history = [],
   color,
+  theme,
 }) => {
   const [typing] = useEvent("TYPED", { loading: false });
   const [message, setMessage] = React.useState("");
@@ -56,7 +56,6 @@ const PopChat = ({
     });
   };
 
-  const theme = useTheme();
   const defaultColors = {
     topBar: "#323a40",
     bottomBar: "#323a40",
@@ -69,15 +68,15 @@ const PopChat = ({
     indicator: "#060F12",
   };
   const themeColors = {
-    topBar: theme.palette.chat.topBar,
-    bottomBar: theme.palette.chat.bottomBar,
-    topBarButton: theme.palette.chat.topBarButton,
-    bottomBarButton: theme.palette.chat.bottomBarButton,
-    userBubble: theme.palette.chat.userBubble,
-    botBubble: theme.palette.chat.botBubble,
-    textField: theme.palette.chat.textField,
-    message: theme.palette.chat.message,
-    indicator: theme.palette.chat.indicator,
+    topBar: theme?.palette.chat.topBar,
+    bottomBar: theme?.palette.chat.bottomBar,
+    topBarButton: theme?.palette.chat.topBarButton,
+    bottomBarButton: theme?.palette.chat.bottomBarButton,
+    userBubble: theme?.palette.chat.userBubble,
+    botBubble: theme?.palette.chat.botBubble,
+    textField: theme?.palette.chat.textField,
+    message: theme?.palette.chat.message,
+    indicator: theme?.palette.chat.indicator,
   };
   const [colorPalette, setColorPalette] = React.useState();
 
