@@ -266,7 +266,6 @@ const PopChat = ({
               </IconButton>
             )}
             <TextField
-              color="secondary"
               autoComplete="off"
               autoFocus
               value={message || transcript}
@@ -288,6 +287,15 @@ const PopChat = ({
                 marginX: "3px",
                 input: {
                   color: colorPalette.textField,
+                },
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: colorPalette.bottomBarButton,
+                  },
+
+                  "&.Mui-focused fieldset": {
+                    borderColor: colorPalette.bottomBarButton,
+                  },
                 },
               }}
             />
