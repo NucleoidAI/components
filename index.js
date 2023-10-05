@@ -4,7 +4,7 @@ export * from "./AddList";
 export { default as AlertMessage } from "./AlertMessage";
 export * from "./AlertMessage";
 
-export { default as ChatWindow } from "./PopChat";
+export { default as PopChat } from "./PopChat";
 export * from "./PopChat";
 
 export { default as Confetti } from "./Confetti";
