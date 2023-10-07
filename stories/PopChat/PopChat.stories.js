@@ -1,34 +1,33 @@
-import theme from "../../.storybook/yourTheme";
+import theme from "../../theme";
 
-import ChatWindow, { handleAddResponseMessage } from "../../ChatWindow";
-import React, { useState } from "react"; // eslint-disable-line
+import PopChat, { handleAddResponseMessage } from "../../PopChat";
+import React, { useEffect, useState } from "react"; // eslint-disable-line
 
 export default {
-  title: "Nucleoid/ChatWindow",
-  component: ChatWindow,
-  theme: theme,
+  title: "Nucleoid/PopChat",
+  component: PopChat,
 };
-
 export const Default = {
   args: {
     title: "NucBot",
     open: true,
     history: [{ message: "Welcome to NucBot!", user: false }],
-    color: "default",
+    appTheme: theme,
+    colorType: "default",
     closeButton: true,
     handleClose: () => {},
     handleNewUserMessage: (msg) => {
       handleAddResponseMessage(`You said: ${msg}`);
     },
-    theme: theme,
   },
 };
 export const AppTheme = {
   args: {
     title: "Chat",
-    open: false,
+    open: true,
     history: [{ message: "Welcome to NucBot!", user: false }],
-    color: "appTheme",
+    appTheme: theme,
+    colorType: "appTheme",
     closeButton: true,
     handleClose: () => {},
     handleNewUserMessage: (msg) => {
