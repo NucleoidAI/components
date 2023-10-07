@@ -1,16 +1,16 @@
 import { Canvas, Meta } from "@storybook/blocks";
 
-import * as ChatWindow from "./ChatWindow.stories";
+import * as PopChat from "./PopChat.stories.js";
 
-<Meta of={ChatWindow} />
+<Meta of={PopChat} />
 
-# ChatWindow
+# PopChat
 
-The `ChatWindow` component represents a draggable and resizable chat window interface powered by the OpenAI chatbot, NucBot. The component includes a chat header, content area for displaying chat history, a text field for new user messages a button for submitting new messages and allows the use of dictation.
+The `PopChat` component represents a draggable and resizable chat window interface powered by the OpenAI chatbot, NucBot. The component includes a chat header, content area for displaying chat history, a text field for new user messages a button for submitting new messages and allows the use of dictation.
 
 ## Usage
 
-To make use of the `ChatWindow` component, you will need to pass certain props to it. Here's an explanation of each prop:
+To make use of the `PopChat` component, you will need to pass certain props to it. Here's an explanation of each prop:
 
 - `open`: A boolean value indicating whether the chat window is open or closed.
 
@@ -34,4 +34,6 @@ To make use of the `ChatWindow` component, you will need to pass certain props t
 
    *false*: The closeButton becomes ready to be moved; pressing on it will not close the Chat Window.
 
-  <Canvas of={ChatWindow.Default} />
+  <Canvas of={PopChat.Default} />
+
+
