@@ -36,9 +36,10 @@ const PopChat = ({
   handleClose,
   handleNewUserMessage,
   history = [],
-  color,
-  theme,
+  colorType,
+  appTheme,
 }) => {
+  console.log(appTheme);
   const [typing] = useEvent("TYPED", { loading: false });
   const [message, setMessage] = React.useState("");
   const [messages, setMessages] = React.useState([...history]);
@@ -68,20 +69,20 @@ const PopChat = ({
     indicator: "#060F12",
   };
   const themeColors = {
-    topBar: theme?.palette.chat.topBar,
-    bottomBar: theme?.palette.chat.bottomBar,
-    topBarButton: theme?.palette.chat.topBarButton,
-    bottomBarButton: theme?.palette.chat.bottomBarButton,
-    userBubble: theme?.palette.chat.userBubble,
-    botBubble: theme?.palette.chat.botBubble,
-    textField: theme?.palette.chat.textField,
-    message: theme?.palette.chat.message,
-    indicator: theme?.palette.chat.indicator,
+    topBar: appTheme?.palette.chat.topBar,
+    bottomBar: appTheme?.palette.chat.bottomBar,
+    topBarButton: appTheme?.palette.chat.topBarButton,
+    bottomBarButton: appTheme?.palette.chat.bottomBarButton,
+    userBubble: appTheme?.palette.chat.userBubble,
+    botBubble: appTheme?.palette.chat.botBubble,
+    textField: appTheme?.palette.chat.textField,
+    message: appTheme?.palette.chat.message,
+    indicator: appTheme?.palette.chat.indicator,
   };
   const [colorPalette, setColorPalette] = React.useState();
 
   React.useEffect(() => {
-    switch (color) {
+    switch (colorType) {
       case "default": {
         setColorPalette(defaultColors);
         break;
@@ -92,7 +93,7 @@ const PopChat = ({
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [color]);
+  }, [colorType]);
 
   React.useEffect(() => {
     response((ret) => {
@@ -142,7 +143,7 @@ const PopChat = ({
           <Box
             className="handle"
             sx={{
-              backgroundColor: colorPalette.topBar,
+              backgroundColor: colorPalette?.topBar,
               display: "flex",
               justifyContent: "flex-end",
               alignItems: "center",
@@ -155,18 +156,20 @@ const PopChat = ({
               borderRadius: "7px 7px 0px 0px",
             }}
           >
-            <Box sx={{ marginRight: "auto", color: colorPalette.topBarButton }}>
+            <Box
+              sx={{ marginRight: "auto", color: colorPalette?.topBarButton }}
+            >
               {title}
             </Box>
             <IconButton onClick={changeMute}>
               {mute ? (
-                <VolumeOffIcon sx={{ color: colorPalette.topBarButton }} />
+                <VolumeOffIcon sx={{ color: colorPalette?.topBarButton }} />
               ) : (
-                <VolumeUpIcon sx={{ color: colorPalette.topBarButton }} />
+                <VolumeUpIcon sx={{ color: colorPalette?.topBarButton }} />
               )}
             </IconButton>
             <IconButton onClick={handleClose}>
-              <CloseIcon sx={{ color: colorPalette.topBarButton }} />
+              <CloseIcon sx={{ color: colorPalette?.topBarButton }} />
             </IconButton>
           </Box>
           {/* content */}
@@ -185,10 +188,10 @@ const PopChat = ({
                 <div
                   style={{
                     backgroundColor: item.user
-                      ? colorPalette.userBubble
-                      : colorPalette.botBubble,
+                      ? colorPalette?.userBubble
+                      : colorPalette?.botBubble,
                     alignSelf: item.user ? "end" : "start",
-                    color: colorPalette.message,
+                    color: colorPalette?.message,
                     borderRadius: item.user
                       ? "15px 15px 0px 15px"
                       : "15px 15px 15px 0px",
@@ -216,7 +219,7 @@ const PopChat = ({
             {typing.loading && (
               <div
                 style={{
-                  backgroundColor: colorPalette.botBubble,
+                  backgroundColor: colorPalette?.botBubble,
                   width: "fit-content",
                   alignSelf: "start",
                   borderRadius: "15px 15px 15px 0px",
@@ -237,7 +240,7 @@ const PopChat = ({
                       <div
                         className="dots"
                         style={{
-                          "--_g": `no-repeat radial-gradient(circle closest-side,  ${colorPalette.indicator} 90%,#0000)`,
+                          "--_g": `no-repeat radial-gradient(circle closest-side,  ${colorPalette?.indicator} 90%,#0000)`,
                         }}
                       ></div>
                     </div>
@@ -252,16 +255,16 @@ const PopChat = ({
               width: "100%",
               p: 1,
               boxShadow: 20,
-              backgroundColor: colorPalette.bottomBar,
+              backgroundColor: colorPalette?.bottomBar,
               borderRadius: "0px 0px 7px 7px",
             }}
           >
             {browserSupportsSpeechRecognition && (
               <IconButton onClick={listenUser}>
                 {listen ? (
-                  <MicIcon sx={{ color: colorPalette.bottomBarButton }} />
+                  <MicIcon sx={{ color: colorPalette?.bottomBarButton }} />
                 ) : (
-                  <MicNoneIcon sx={{ color: colorPalette.bottomBarButton }} />
+                  <MicNoneIcon sx={{ color: colorPalette?.bottomBarButton }} />
                 )}
               </IconButton>
             )}
@@ -287,12 +290,21 @@ const PopChat = ({
                 width: "80%",
                 marginX: "3px",
                 input: {
-                  color: colorPalette.textField,
+                  color: colorPalette?.textField,
+                },
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: colorPalette?.bottomBarButton,
+                  },
+
+                  "&.Mui-focused fieldset": {
+                    borderColor: colorPalette?.bottomBarButton,
+                  },
                 },
               }}
             />
             <IconButton onClick={newUserMessage}>
-              <SendIcon sx={{ color: colorPalette.bottomBarButton }} />
+              <SendIcon sx={{ color: colorPalette?.bottomBarButton }} />
             </IconButton>
           </Box>
           {/*button */}
