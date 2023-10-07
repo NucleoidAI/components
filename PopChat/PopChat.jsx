@@ -293,15 +293,6 @@ const PopChat = ({
                 },
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
-                    borderColor: colorPalette?.bottomBarButton,
-                  },
-
-                  "&.Mui-focused fieldset": {
-                    borderColor: colorPalette?.bottomBarButton,
-                  },
-                },
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": {
                     borderColor: colorPalette.bottomBarButton,
                   },
 
